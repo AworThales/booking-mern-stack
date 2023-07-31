@@ -1,3 +1,27 @@
 .navBar{
-    
+    height: 55px;
+    background-color: #bc3bc4;
+    display: flex;
+    justify-content: center;
+}
+
+.navBarContainer {
+    width: 100%;
+    max-width: 1024px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navLogo {
+    font-weight: 600;
+}
+
+.navBarButton {
+    margin-left: 20px;
+    color: #bc3bc4;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
