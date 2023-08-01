@@ -1,3 +1,29 @@
 .propertyList {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+}
 
+.proListItem {
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.proListImg {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.proListTitles > h1 {
+    font-size: 20px;
+}
+
+.proListTitles > h2 {
+    font-size: 15px;
+    font-weight: 300;
 }

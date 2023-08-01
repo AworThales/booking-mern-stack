@@ -1,3 +1,23 @@
 .footer {
-    
+    width: 100%;
+    max-width: 1024px;
+    font-size: 13px;
+}
+
+.footerLists {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.footerList {
+    list-style: none;
+    padding: 0;
+}
+
+.footerListItem {
+    color: #800986;
+    margin-bottom: 11px;
+    cursor: pointer;
 }

@@ -1,3 +1,44 @@
 .featuredProperties {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: space-between;
+    gap: 22px;
+}
 
+.fPropsItem {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+
+.fPropsImg {
+    width: 100%;
+    height: 250px;
+}
+
+.fPropsName {
+    font-weight: bold;
+}
+
+.fPropsCity {
+    font-weight: 500;
+}
+
+.fPropsPrice {
+    font-weight: 300;
+}
+
+.fPropsRating > button{
+    background-color: #800986;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.fPropsRating > span {
+    font-size: 15px;
 }
