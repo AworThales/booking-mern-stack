@@ -6,8 +6,10 @@ import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({type}) {
+    const [ destination, setDestination ] = useState("");
     const [ OpenDate, setOpenDate ] = useState(false);
     const [ date, setDate ] = useState([
         {
@@ -16,6 +18,8 @@ export default function Header({type}) {
             key: 'selection'
         },
     ]);
+
+    const navigate = useNavigate()
 
     const [openOptions, setOpenOptions] = useState(false);
     const [ options, setOptions] = useState({
@@ -30,6 +34,10 @@ export default function Header({type}) {
             ...prev, 
             [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
         }});
+    }
+
+    const handleSearch = () => {
+        navigate("/hotels", {state: {destination, date, options}}) 
     }
 
     return (
@@ -68,7 +76,7 @@ export default function Header({type}) {
                 <div className="headerSearch">
                     <div className="headerSearchItem">
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />
-                        <input className="headerSearchInput" type="text" placeholder="Where are you going?" />
+                        <input onChange={(e) => setDestination(e.target.value)} className="headerSearchInput" type="text" placeholder="Where are you going?" />
                     </div>
                     <div className="headerSearchItem">
                         <FontAwesomeIcon icon={faCalendarDays} className="headerIcon"/>
@@ -78,6 +86,7 @@ export default function Header({type}) {
                             onChange={item => setDate([item.selection])}
                             moveRangeOnFirstSelection={false}
                             ranges={date}
+                            minDate={new Date()}
                             className="date"
                         />}
                     </div>
@@ -112,7 +121,7 @@ export default function Header({type}) {
                         </div>}
                     </div>
                     <div className="headerSearchItem">
-                        <button className="headerBtn">Search</button>
+                        <button onClick={handleSearch} className="headerBtn">Search</button>
                     </div>
                 </div>
             </>}

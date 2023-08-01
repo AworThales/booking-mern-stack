@@ -1,3 +1,110 @@
 .searchItem {
-    
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid lightgray;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 22px;
+    margin-bottom: 20px;
+}
+
+.searchImg {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+}
+
+.searchDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 2;
+}
+
+.searchTitle {
+    font-size: 22px;
+    color: #800986;
+}
+
+.searchDistance {
+    font-size: 14px;
+}
+
+.searchTaxiOp {
+    font-size: 14px;
+    background-color: #008009;
+    color: #fff;
+    width: max-content;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.searchSubtitle {
+    font-size: 14px;
+    font-weight: bold;
+}
+.searchFeatures {
+    font-size: 14px;
+}
+
+.searchCancelOp {
+    font-size: 14px;
+    font-weight: bold;
+    color: #008009;
+}
+
+.searchCancelOpSubtitle {
+    font-size: 14px;
+    color: #008009;
+}
+
+.searchDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.searchRating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchRating > span {
+    font-weight: 500;
+}
+
+.searchRating > button {
+    color: #fff;
+    background-color: #800986;
+    padding: 6px;
+    border: none;
+    font-weight: bold;
+}
+
+.searchDetailTexts {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.searchPrice {
+    font-size: 14px;
+}
+
+.searchTaxOp {
+    font-size: 14px;
+    color: grey;
+}
+
+.searchCheckButton {
+    color: #fff;
+    background-color: #800986;
+    padding: 12px 6px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+
 }
