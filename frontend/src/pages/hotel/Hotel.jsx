@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function Hotel() {
    const [slideNumber, setSlideNumber] = useState(0);
-   const [openSlider, setOpenSlider] = useState(true);
+   const [openSlider, setOpenSlider] = useState(false);
 
    const photos = [
       {
