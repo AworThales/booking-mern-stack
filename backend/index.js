@@ -30,6 +30,19 @@ app.use("/api/v1/users", UsersRoute);
 app.use("/api/v1/hotels", HotelsRoute);
 app.use("/api/v1/rooms", RoomsRoute);
 
+// Error midleware handler
+app.use((err, req, res, next) =>{
+    const errorStatus = err.status || 500;
+    const errMessage = err.message || "Something went wrong!"
+    return res.status(errorStatus).json({
+        // sending response to users
+        success: false,
+        status: errorStatus,
+        message: errMessage,
+        stack: err.stack,  //to explain more detail from error message
+    });
+})
+
 // mongoose.connection.on("connected", () => {
 //     console.log("MongoDB connected");
 // })
