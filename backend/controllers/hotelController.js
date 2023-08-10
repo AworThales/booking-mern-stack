@@ -31,7 +31,9 @@ export const updateHotel = async (req, res, next) => {
 export const deleteHotel = async (req, res, next) => {
     try{
         // we won't create a vairable since we are not returning anything
-        await Hotel.findByIdAndDelete(req.params.id);
+        await Hotel.findByIdAndDelete(
+            req.params.id
+        );
         res.status(200).json("Hotel deleted successfully");
     }
     catch(err){
