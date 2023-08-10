@@ -1,10 +1,12 @@
 import express from "express";
+import { login, register } from "../controllers/authController.js";
 const router = express.Router();
 
-// we can take any api request using this router
-router.get("/", (req, res) => {
-    res.send("Hello this auth endpoint");
-})
+/** Register route */
+router.post("/register", register);
+
+/** Login route */
+router.post("/login", login);
 
 
 export default router
