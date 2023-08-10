@@ -5,6 +5,7 @@ import AuthRoute from "./routes/auth.js";
 import UsersRoute from "./routes/users.js";
 import HotelsRoute from "./routes/hotels.js";
 import RoomsRoute from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 
@@ -22,8 +23,8 @@ mongoose.connection.on("connected", () => {
 })
 
 /** Middlewares */
-
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/v1/auth", AuthRoute); // whenevver we make request for this endpoint use this authRouth
 app.use("/api/v1/users", UsersRoute);
@@ -41,7 +42,7 @@ app.use((err, req, res, next) =>{
         message: errMessage,
         stack: err.stack,  //to explain more detail from error message
     });
-})
+});
 
 // mongoose.connection.on("connected", () => {
 //     console.log("MongoDB connected");
@@ -53,6 +54,6 @@ app.use((err, req, res, next) =>{
 // })
 
 app.listen(8080, () => {
-    connect()
+    connect();
     console.log("backend is running");
 });
