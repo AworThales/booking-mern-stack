@@ -6,6 +6,7 @@ import UsersRoute from "./routes/users.js";
 import HotelsRoute from "./routes/hotels.js";
 import RoomsRoute from "./routes/rooms.js";
 import cookieParser from "cookie-parser";
+import cors from "cors"
 const app = express();
 dotenv.config();
 
@@ -23,12 +24,13 @@ mongoose.connection.on("connected", () => {
 })
 
 /** Middlewares */
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1/auth", AuthRoute); // whenevver we make request for this endpoint use this authRouth
 app.use("/api/v1/users", UsersRoute);
-app.use("/api/v1/hotels", HotelsRoute);
+app.use("/api/hotels/", HotelsRoute);
 app.use("/api/v1/rooms", RoomsRoute);
 
 // Error midleware handler
@@ -53,7 +55,7 @@ app.use((err, req, res, next) =>{
 //     res.send("Hello my first request")
 // })
 
-app.listen(8080, () => {
+app.listen(5000, () => {
     connect();
     console.log("backend is running");
 });
