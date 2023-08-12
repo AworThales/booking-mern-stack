@@ -6,14 +6,26 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
 
 export default function List() {
    const location = useLocation();
-   console.log(location)
+   // console.log(location)
    const [destination, setDestination] = useState(location.state.destination);
    const [date, setDate] = useState(location.state.date);
    const [openDate, setOpenDate] = useState(false);
    const [options, setOptions] = useState(location.state.options);
+   const [min, setMin] = useState(undefined);
+   const [max, setMax] = useState(undefined);
+
+   //Fetching data from Api
+   const { data, loading, error, reFetcher } = useFetch(`hotels?city=${destination}&min=${min || 0 }&max=${max || 599}`);
+    console.log(data);
+
+    const handleClick = ()=>{
+      reFetcher();
+    };
+
     return (
      <div className="list">
         <NavBar />
@@ -40,11 +52,11 @@ export default function List() {
                      <div className="listOptions">
                         <div className="listOptionItem">
                            <span className="listOptionText">Min price <small>per night</small></span>
-                           <input type="number" className="listOptionInput" />
+                           <input onChange={(e)=>setMin(e.target.value)} type="number" className="listOptionInput" />
                         </div>
                         <div className="listOptionItem">
                            <span className="listOptionText">Max price <small>per night</small></span>
-                           <input type="number" className="listOptionInput" />
+                           <input onChange={(e)=>setMax(e.target.value)} type="number" className="listOptionInput" />
                         </div>
                         <div className="listOptionItem">
                            <span className="listOptionText">Adult</span>
@@ -60,17 +72,17 @@ export default function List() {
                         </div>
                      </div>
                   </div>
-                  <button>Search</button>
+                  <button onClick={handleClick}>Search</button>
                </div>
                <div className="listResult">
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
-                  <SearchItem />
+                  {loading ? ("loading..")
+                  : (
+                     <>
+                        {data.map((item)=>(
+                           <SearchItem item={item} key={item._id}/>
+                        ))}
+                     </>
+                  )}
                </div>
             </div>
         </div>
