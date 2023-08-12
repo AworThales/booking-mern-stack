@@ -1,22 +1,23 @@
+import { Link } from "react-router-dom";
 import "./searchItem.css";
 
-export default function SearchItem() {
+export default function SearchItem({item}) {
     return (
      <div className="searchItem">
        <img
-        src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
+        src={item.photos[0]}
         alt=""
         className="searchImg"
       />
       <div className="searchDesc">
-            <h1 className="searchTitle">Tower Street Apartments</h1>
-            <span className="searchDistance">400m from center</span>
+            <h1 className="searchTitle">{item.name}</h1>
+            <span className="searchDistance">{item.distance}m from center</span>
             <span className="searchTaxiOp">Free airport taxi</span>
             <span className="searchSubtitle">
             Studio Apartment with Air conditioning
             </span>
             <span className="searchFeatures">
-            Entire studio • 2 bathroom • 25m² 1 full bed
+              {item.desc}
             </span>
             <span className="searchCancelOp">Free cancellation </span>
             <span className="searchCancelOpSubtitle">
@@ -24,14 +25,16 @@ export default function SearchItem() {
             </span>
       </div>
       <div className="searchDetails">
-        <div className="searchRating">
+        {item.rating && <div className="searchRating">
           <span>Excellent</span>
-          <button>8.8</button>
-        </div>
+          <button>{item.rating}</button>
+        </div>}
         <div className="searchDetailTexts">
-          <span className="searchPrice">N2000</span>
+          <span className="searchPrice">N{item.cheapestPrice}</span>
           <span className="searchTaxOp">Includes taxes and fees</span>
-          <button className="searchCheckButton">See availability</button>
+          <Link to={`/hotel/${item._id}`}>
+            <button className="searchCheckButton">See availability</button>
+          </Link>
         </div>
       </div>
      </div>
