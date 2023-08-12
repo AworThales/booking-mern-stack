@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", AuthRoute); // whenevver we make request for this endpoint use this authRouth
 app.use("/api/v1/users", UsersRoute);
-app.use("/api/hotels/", HotelsRoute);
+app.use("/api/v1/hotels/", HotelsRoute);
 app.use("/api/v1/rooms", RoomsRoute);
 
 // Error midleware handler
