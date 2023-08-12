@@ -1,6 +1,8 @@
 import express from "express";
 import { verifyAdmin } from "../utils/verification.js";
 import { 
+    countByCity,
+    countByType,
     createHotel,
     deleteHotel,
     getAllHotel, 
@@ -20,9 +22,13 @@ router.put("/:id", verifyAdmin, updateHotel);
 router.delete("/:id", verifyAdmin, deleteHotel);
 
 // Get an hotel route
-router.get("/:id", getHotel);
+router.get("/find/:id", getHotel);
 
 // Get All hotel route
 router.get("/", getAllHotel);
+
+
+router.get("/countByCity", countByCity);
+router.get("/countByType", countByType);
 
 export default router
