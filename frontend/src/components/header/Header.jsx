@@ -8,6 +8,7 @@ import 'react-date-range/dist/theme/default.css';
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/searchContext";
+import { AuthContext } from "../../context/authContext";
 
 export default function Header({type}) {
     const [ destination, setDestination ] = useState("");
@@ -45,6 +46,8 @@ export default function Header({type}) {
         navigate("/hotels", {state: {destination, dates, options}}) 
     };
 
+    const { user } = useContext(AuthContext);
+
     return (
      <div className="header">
         <div className={type === "list" ? "headerContainer listMode" : "headerContainer"}>
@@ -77,7 +80,7 @@ export default function Header({type}) {
                     Get rewared for your travels - unlock instant saving of 10%
                     or more with a free Tbooking account
                 </p>
-                <button className="headerBtn">Sign in / Register</button>
+                {!user && <button className="headerBtn">Sign in / Register</button>}
                 <div className="headerSearch">
                     <div className="headerSearchItem">
                         <FontAwesomeIcon icon={faBed} className="headerIcon" />
