@@ -12,7 +12,7 @@ export default function List() {
    const location = useLocation();
    // console.log(location)
    const [destination, setDestination] = useState(location.state.destination);
-   const [date, setDate] = useState(location.state.date);
+   const [dates, setDates] = useState(location.state.dates);
    const [openDate, setOpenDate] = useState(false);
    const [options, setOptions] = useState(location.state.options);
    const [min, setMin] = useState(undefined);
@@ -20,7 +20,7 @@ export default function List() {
 
    //Fetching data from Api
    const { data, loading, error, reFetcher } = useFetch(`hotels?city=${destination}&min=${min || 0 }&max=${max || 599}`);
-    console.log(data);
+   //  console.log(data);
 
     const handleClick = ()=>{
       reFetcher();
@@ -40,11 +40,11 @@ export default function List() {
                   </div>
                   <div className="listItem">
                      <label>Check-in date</label>
-                     <span onClick={() => setOpenDate(!openDate)}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+                     <span onClick={() => setOpenDate(!openDate)}>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
                      {openDate && <DateRange
-                        onChange={(item) => setDate([item.selection])}
+                        onChange={(item) => setDates([item.selection])}
                         minDate={new Date()}
-                        ranges={date}
+                        ranges={dates}
                      />}
                   </div>
                   <div className="listItem">
