@@ -23,6 +23,19 @@ export const createRoom = async (req, res, next) =>{
     };
 };
 
+/** Update Room  Availability Fuction */
+export const updateRoomAvailability = async (req, res, next) =>{
+    try{
+        await Room.updateOne({"roomNumbers._id": req.body.id}, {
+            $push: {"roomNumbers.$.unavailableDates": req.body.dates}
+        });
+        res.status(200).json("Room sucessfully updated");
+    }
+    catch(err) {
+        next(err);
+    };
+};
+
 /** Update Room Fuction */
 export const updateRoom = async (req, res, next) =>{
     try{
