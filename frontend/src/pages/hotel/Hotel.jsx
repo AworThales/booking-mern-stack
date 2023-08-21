@@ -6,24 +6,31 @@ import Footer from "../../components/footer/Footer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { SearchContext } from "../../context/searchContext";
+import { AuthContext } from "../../context/authContext";
+import Reserve from "../../components/reserve/Reserve";
 
 export default function Hotel() {
+   const { user } = useContext(AuthContext);
+   const navigate = useNavigate();
+
    const [slideNumber, setSlideNumber] = useState(0);
    const [openSlider, setOpenSlider] = useState(false);
+   const [openModal, setOpenModal] = useState(false);
 
    const location = useLocation();
-   const id = location.pathname.split("/")[2];
+   const hotelId = location.pathname.split("/")[2];
+   console.log(hotelId)
 
    //Fetching data from Api
-   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+   const { data, loading, error } = useFetch(`/hotels/find/${hotelId}`);
    //  console.log(data);
    
    //Fetching datas using search context
    const { dates, options } = useContext(SearchContext);
-    console.log(dates);
+   //  console.log(dates);
 
     // Calculating days
     const MILLISECOND_PER_DAY = 1000 * 60 * 60 * 24;
@@ -32,24 +39,33 @@ export default function Hotel() {
       const DaysDiff = Math.ceil(TimeDiff / MILLISECOND_PER_DAY);
       return DaysDiff;
    };
-   console.log(dayDifference(dates[0].endDate, dates[0].startDate));
-   const days = (dayDifference(dates[0].endDate, dates[0].startDate));
+   const days = (dayDifference(dates[0]?.endDate, dates[0]?.startDate));
+   // console.log(dayDifference(dates[0].endDate, dates[0].startDate));
 
     const handleOpenSlider = (i) => {
       setSlideNumber(i);
-      setOpenSlider(true)
-    }
+      setOpenSlider(true);
+    };
 
     const handleMove = (direction) =>{
       let newSliderNumber;
       if(direction ==="l"){
-         newSliderNumber = slideNumber === 0 ? 5 : slideNumber - 1
+         newSliderNumber = slideNumber === 0 ? 5 : slideNumber - 1;
       }else{
-         newSliderNumber = slideNumber === 5 ? 0 : slideNumber + 1
+         newSliderNumber = slideNumber === 5 ? 0 : slideNumber + 1;
       }
 
       setSlideNumber(newSliderNumber);
-    }
+    };
+
+    //book now handle click
+    const handleClick = () =>{
+      if(user){
+         setOpenModal(true);
+      }else{
+         navigate("/login");
+      }
+    };
 
     return (
      <div className="hotel">
@@ -102,7 +118,7 @@ export default function Hotel() {
                            <h2>
                               <b>N{days * data.cheapestPrice * options.room}</b> ({days}{" "} Nights)
                            </h2>
-                           <button>Reserve or Book Now!</button>
+                           <button onClick={handleClick}>Reserve or Book Now!</button>
                         </div>
                      </div>
                   </div>
@@ -111,6 +127,7 @@ export default function Hotel() {
             </div>
             </>
          )}
+         {openModal && <Reserve setOpenModal={setOpenModal} hotelId={hotelId}/>}
      </div>
     );
   }
