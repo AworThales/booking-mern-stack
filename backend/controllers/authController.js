@@ -37,7 +37,7 @@ export const login = async (req, res, next) => {
         const { password, isAdmin, ...othersData} = user._doc;  // taking off password, isAdmin from user and send otherData of the user, else it will send password. we attach"._doc" so we can see our data
         res.cookie("access_token", token, {  // setting our token into our cookie
             httpOnly: true,   // we doing this bcoz it doesn't allow client side to reach this cookie
-        }).status(200).json(othersData); // if everything is okay send users data that is left
+        }).status(200).json({details: {...othersData}, isAdmin}); // if everything is okay send users data that is left
     }
     catch(err){
         next(err);
