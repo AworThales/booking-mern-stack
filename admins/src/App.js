@@ -10,6 +10,7 @@ import "./style/dark.scss"
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
+import { hotelColumns, userColumns } from "./datatablesource";
 
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
             <Route path="users">
               <Route index element={
                 <ProtectedRoute>
-                  <List />
+                  <List columns={userColumns}/>
               </ProtectedRoute>
               } />
               <Route path=":userId" element={
@@ -55,13 +56,13 @@ function App() {
             </Route>
 
             {/* Products routing */}
-            <Route path="products">
+            <Route path="hotels">
               <Route index element={
                 <ProtectedRoute>
-                  <List />
+                  <List columns={hotelColumns} />
                 </ProtectedRoute>
               } />
-              <Route path=":productId" element={
+              <Route path=":hotelId" element={
                 <ProtectedRoute>
                 <Single />
                 </ProtectedRoute>
